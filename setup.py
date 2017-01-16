@@ -35,6 +35,9 @@ else:
     ]
     kwargs['scripts'] = ['odml-gui']
 
+with open('README.rst') as f:
+    description_text = f.read()
+
 setup(name='odML',
       version='1.2.1',
       description='open metadata Markup Language',
@@ -50,5 +53,6 @@ setup(name='odML',
           }
       },
       install_requires=["enum", "lxml"],
+      long_description=description_text,
       **kwargs
       )

@@ -12,14 +12,19 @@ Dependencies
 * Python 2.7.
 * Python packages:
 
-    * Enum (version 0.4.4)
-    * lxml (version 3.7.2)
+  * enum (version 0.4.4)
+  * lxml (version 3.7.2)
 
-* The following packages are required to install the lxml Python package on Ubuntu:
+* These packages will be downloaded and installed automatically if the :code:`pip` method is used to install odML. Alternatively, they can be installed from the OS package manager. On Ubuntu, they are available as:
 
-    * libxml2-dev
-    * libxslt1-dev
-    * lib32z1-dev
+  * python-enum
+  * python-lxml
+
+* If you prefer installing using the Python package manager, the following packages are required to build the lxml Python package on Ubuntu 14.04:
+
+  * libxml2-dev
+  * libxslt1-dev
+  * lib32z1-dev
 
 
 Installation
