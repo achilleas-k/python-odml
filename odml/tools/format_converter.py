@@ -3,9 +3,9 @@ import os
 import re
 import sys
 
-import odml
-from .rdf_converter import RDFWriter
-from .version_converter import VersionConverter
+from .. import load as odmlload, save as odmlsave
+from . import RDFWriter
+from . import VersionConverter
 
 try:
     unicode = unicode
@@ -38,13 +38,13 @@ class FormatConverter(object):
         Enable usage of the argparse for calling convert_dir(...)
         Example:
             1) >> python format_converter.py ./..path../input_dir v1_1 -out ./..path../output_dir -r
-            
+
                Convert files from the path <./..path../input_dir> to .xml odml version 1.1,
-               writes them into <./..path../output_dir> including subdirectories 
+               writes them into <./..path../output_dir> including subdirectories
                and its files from the input path.
-            
+
             2) >> python format_converter.py ./..path../input_dir odml
-            
+
                Converts files from path <./..path../input_dir> to .odml,
                writes them into <./..path../input_dir_odml> not including subdirectories.
         """
@@ -66,7 +66,7 @@ class FormatConverter(object):
         :param input_dir: Path to input directory
         :param output_dir: Path for output directory. If None, new directory will be created on the same level as input
         :param parse_subdirs: If True enable converting files from subdirectories
-        :param res_format: Format of output files. 
+        :param res_format: Format of output files.
                            Possible choices: "v1_1" (converts to version 1.1 from version 1 xml)
                                              "odml" (converts to .odml from version 1.1 .xml files)
                                              "turtle", "nt" etc. (converts to rdf formats from version 1.1 .odml files)
@@ -113,12 +113,12 @@ class FormatConverter(object):
             if not output_path.endswith(".odml"):
                 p, _ = os.path.splitext(output_path)
                 output_path = p + ".odml"
-            odml.save(odml.load(input_path), output_path)
+            odmlsave(odmlload(input_path), output_path)
         elif res_format in cls._conversion_formats:
             if not output_path.endswith(cls._conversion_formats[res_format]):
                 p, _ = os.path.splitext(output_path)
                 output_path = p + cls._conversion_formats[res_format]
-            RDFWriter(odml.load(input_path)).write_file(output_path, res_format)
+            RDFWriter(odmlload(input_path)).write_file(output_path, res_format)
 
     @staticmethod
     def _create_sub_directory(dir_path):
@@ -131,7 +131,7 @@ class FormatConverter(object):
     @staticmethod
     def _check_input_output_directory(input_dir, output_dir):
         """
-        Checks if provided directory is valid - not None, is directory and not a root folder in the File System 
+        Checks if provided directory is valid - not None, is directory and not a root folder in the File System
         if output dir was not provided.
         Raise relevant exceptions.
         """

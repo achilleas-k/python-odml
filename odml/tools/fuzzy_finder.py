@@ -1,9 +1,9 @@
-from odml.tools.query_creator import QueryCreator, QueryParser, QueryParserFuzzy
+from . import QueryCreator, QueryParser, QueryParserFuzzy
 
 
 class FuzzyFinder(object):
     """
-    FuzzyFinder tool for querying graph through 'fuzzy' queries. 
+    FuzzyFinder tool for querying graph through 'fuzzy' queries.
     If the user do not know exact attributes and structure of the odML data model,
     the finder executes multiple queries to better match the parameters and returns sets of triples.
     """
@@ -17,7 +17,7 @@ class FuzzyFinder(object):
         # TODO warn users if they added non-odml attributes ('naming' instead of 'name' e.g.)
         """
         Apply set of queries to the graph and returns info that was retrieved from queries.
-        
+
         :param mode:     define the type of parser which will be used for parsing parameters or queries.
                          Please find our more info about concrete parsers in odml/tool/query_creator.py or tutorials.
         :param graph:    graph object.
@@ -84,11 +84,11 @@ class FuzzyFinder(object):
         """
         Generates set of tuples matching search select and where parts of fuzzy finder query
         from dictionary of parameters.
-        
+
         Example:  {'Sec': ['name', 'type'],
                    'Doc': ['author'],
-                   'Search': ['Stimulus', 'Contrast']} 
-        :return:  [('Sec', ('name', 'Stimulus')), ('Sec', ('name', 'Contrast')), 
+                   'Search': ['Stimulus', 'Contrast']}
+        :return:  [('Sec', ('name', 'Stimulus')), ('Sec', ('name', 'Contrast')),
                    ('Sec', ('type', 'Stimulus')), ('Sec', ('name', 'Contrast')),
                    ('Doc', ('author', 'Stimulus')), ('Doc', ('author', 'Contrast'))]
         """
@@ -120,7 +120,7 @@ class FuzzyFinder(object):
         """
         Generates all subsets of attrs set using Depth-first search.
         Example (with numbers for explicity: [1,2,3] -> [[1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]
-        
+
         :param index: help index for going through list.
         :param path:  array for saving subsets.
         :param res:   result subset.
@@ -159,7 +159,7 @@ class FuzzyFinder(object):
     def _execute_query(self, query):
         """
         Execute prepared query on the graph.
-        
+
         :param query: prepared query object
         :return: string with output triples
         """
@@ -173,7 +173,7 @@ class FuzzyFinder(object):
     def _build_output_str(row):
         """
         Build output string depending on the query variables.
-        
+
         :param row: rdflib query row.
         :return: string with values.
         """
@@ -192,7 +192,7 @@ class FuzzyFinder(object):
     def _prepare_query(args):
         """
         Return a query for given parameters.
-        
+
         :param args: dict with list of odML object attributes for creation query
                      Example: {'Sec': [('name', 'some_name'), ('type', 'Stimulus')]}
         :return: QueryCreator object.

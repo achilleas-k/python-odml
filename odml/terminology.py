@@ -15,8 +15,8 @@ except ImportError:
 
 from hashlib import md5
 
-from .tools.parser_utils import ParserException
-from .tools.xmlparser import XMLReader
+from .tools import ParserException
+from .tools import XMLReader
 
 
 REPOSITORY_BASE = 'http://portal.g-node.org/odml/terminologies'

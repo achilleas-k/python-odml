@@ -3,10 +3,11 @@ _property = property
 from . import doc
 from . import property
 from . import section
+from .terminology import Terminologies
 from .dtypes import DType
 from .fileio import load, save, display
 from .info import VERSION
-from .tools.parser_utils import SUPPORTED_PARSERS as PARSERS
+from .tools import SUPPORTED_PARSERS as PARSERS
 
 __version__ = VERSION
 

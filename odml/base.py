@@ -5,8 +5,8 @@ Collects common base functionality
 import collections
 import posixpath
 
-from . import terminology
-from .tools.doc_inherit import allow_inherit_docstring
+from .terminology import deferred_load
+from .tools import allow_inherit_docstring
 
 
 class BaseObject(object):
@@ -607,7 +607,7 @@ class Sectionable(BaseObject):
             url = None
         self._repository = url
         if url:
-            terminology.deferred_load(url)
+            deferred_load(url)
 
     def get_repository(self):
         """
